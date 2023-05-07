@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Translation</title>
+</head>
+<body>
+    <h1>Translation</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="input_text">Input Text:</label><br>
+        <textarea id="input_text" name="input_text" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Translate">
+    </form>
+    {% if input_text and translated_text %}
+        <hr>
+        <p><strong>Input Text:</strong> {{ input_text }}</p>
+        <p><strong>Translated Text:</strong> {{ translated_text }}</p>
+    {% endif %}
+</body>
+</html>
