@@ -1,21 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>自然言語翻訳</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <h1>翻訳フォーム</h1>
-    <form method="post" action="">
-        {% csrf_token %}
-        <label for="input_text">Input Text:</label><br>
-        <textarea id="input_text" name="input_text" rows="4" cols="50"></textarea><br><br>
-        <input type="submit" value="Translate">
-    </form>
-    {% if input_text and translated_text %}
-        <hr>
-        <p><strong>Input Text:</strong> {{ input_text }}</p>
-        <p><strong>Translated Text:</strong> {{ translated_text }}</p>
+    <div class="transForm">
+        <form method="post" action="">
+            {% csrf_token %}
+            <label for="input_text">翻訳するテキスト</label><br>
+            <textarea id="input_text" name="input_text" rows="4" cols="50"></textarea><br><br>
+            <input type="submit" value="Translate">
+        </form>
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <label for="input_text">翻訳されたテキスト</label><br>
+            <textarea id="input_text" name="translated_text" rows="4" cols="50"></textarea><br><br>
+        </form>
+    </div>
+
+    {% if translated_text %}
+    <script>
+        var textarea = document.getElementsByName("translated_text")[0];
+        textarea.value = "{{ translated_text }}";
+
+        var textarea = document.getElementsByName("input_text")[0];
+        textarea.value = "{{ input_text }}"
+    </script>
     {% endif %}
 </body>
 </html>
