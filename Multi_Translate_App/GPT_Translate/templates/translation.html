@@ -7,22 +7,28 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <h1>翻訳フォーム</h1>
-    <div class="transForm">
-        <form method="post" action="">
+    <h1 style="text-align: center;">翻訳フォーム</h1>
+<div>
+    <div>
+        <form method="post" action="" class="transForm">
+            <div>
             {% csrf_token %}
             <label for="input_text">翻訳するテキスト</label><br>
-            <textarea id="input_text" name="input_text" rows="4" cols="50"></textarea><br><br>
-            <input type="submit" value="Translate">
-        </form>
+            <textarea class="main_textarea" id="input_text" name="input_text" cols="50" rows="10"></textarea><br><br>
+            </div>
 
-        <form method="post" action="">
-            {% csrf_token %}
-            <label for="input_text">翻訳されたテキスト</label><br>
-            <textarea id="input_text" name="translated_text" rows="4" cols="50"></textarea><br><br>
-        </form>
+    <div class="transBtn_wrap">
+        <button type="submit" class="transBtn">→</button>
     </div>
 
+        <div>
+            {% csrf_token %}
+            <label for="input_text">翻訳されたテキスト</label><br>
+            <textarea class="main_textarea" id="input_text" name="translated_text" cols="50" rows="10" readonly></textarea><br><br>
+        </div>
+        </form>
+    </div>
+</div>
     {% if translated_text %}
     <script>
         var textarea = document.getElementsByName("translated_text")[0];
