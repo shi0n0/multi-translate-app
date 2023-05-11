@@ -1,3 +1,35 @@
 .transForm{
+    margin-left: 3rem;
+    margin-right: 3rem;
     display: flex;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.main_textarea{
+    padding: 1rem 1rem;
+    font-size: 1.2rem;
+}
+
+.transBtn_wrap{
+    display: flex;
+    align-items: center;
+}
+
+.transBtn{
+    display: flex;
+    width: 5rem;
+    height: 5rem;
+    align-items: center;
+    border: solid rgb(0, 208, 255);
+    border-radius: 40%;
+    padding: 2rem;
+    background-color: rgb(0, 208, 255);
+    box-shadow: 0.5rem 0px 0px rgba(0, 0, 0, 0.29), -0.5rem 0px 0px rgb(0, 208, 255);
+
+}
+.transBtn:active{
+    -webkit-transform: translateX(0.5rem);
+    transform: translateX(0.5rem);
+    box-shadow: -0.5rem 0px 0px rgb(0, 208, 255);
 }
