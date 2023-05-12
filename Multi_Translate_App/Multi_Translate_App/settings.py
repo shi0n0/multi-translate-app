@@ -69,9 +69,12 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 WSGI_APPLICATION = 'Multi_Translate_App.wsgi.application'
 
