@@ -1,11 +1,11 @@
 from django.shortcuts import render
 import openai
 
-openai.api_key = "API_KEY"
+openai.api_key = "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"
 
-def translate(input_text):
+def translate_jp_to_en(input_text):
     response = openai.Completion.create(
-        engine="text-davinci-002",
+        engine="text-davinci-003",
         prompt=(f"You are a professional translator. Translate the following sentences into English in a natural way:\n{input_text}\n\n"
                 "Translation:"),
         temperature=0.7,
@@ -19,5 +19,5 @@ def translation_view(request):
     if request.method == 'POST':
         input_text = request.POST['input_text']
         if input_text:
-            translated_text = translate(input_text)
+            translated_text = translate_jp_to_en(input_text)
     return render(request, 'translation.html', {'input_text': input_text, 'translated_text': translated_text})
