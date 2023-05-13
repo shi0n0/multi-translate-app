@@ -1,9 +1,9 @@
 databases:
-  - name: AI_Translate_DB
+  - name: ai_translate_db
     region: singapore
     plan: free
-    databaseName: AI_Translate_DB
-    user: Translate_user
+    databaseName: ai_translate_db
+    user: translate_user
 
 services:
   - type: web
