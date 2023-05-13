@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import openai
 
-openai.api_key = "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"
+openai.api_key = "API_KEY"
 
 def translate_jp_to_en(input_text):
     response = openai.Completion.create(
