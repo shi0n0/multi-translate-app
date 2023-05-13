@@ -16,9 +16,9 @@ services:
     branch: main
     healthCheckPath: /
     envVars:
-      - key: DATABASE_URL
+      - key: ai_translate_db
         fromDatabase:
-          name: AI-Translate-DB
+          name: ai_translate_db
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
