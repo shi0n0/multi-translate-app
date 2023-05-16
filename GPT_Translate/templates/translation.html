@@ -14,7 +14,8 @@
 
 .transBtn_wrap{
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .transBtn{
@@ -27,6 +28,7 @@
     padding: 2rem;
     background-color: rgb(0, 208, 255);
     box-shadow: 0.5rem 0px 0px rgba(0, 0, 0, 0.29), -0.5rem 0px 0px rgb(0, 208, 255);
+    margin: 1rem;
 
 }
 .transBtn:active{
@@ -46,21 +48,22 @@
     <h1 style="text-align: center;">翻訳フォーム</h1>
 <div>
     <div>
-        <form method="post" action="" class="transForm">
+        <form method="post" action="{% url 'translation' %}" class="transForm">
             <div>
             {% csrf_token %}
             <label for="input_text">翻訳するテキスト</label><br>
             <textarea class="main_textarea" id="input_text" name="input_text" cols="50" rows="10"></textarea><br><br>
             </div>
 
-    <div class="transBtn_wrap">
-        <button type="submit" class="transBtn">→</button>
-    </div>
+            <div class="transBtn_wrap">
+                <button type="submit" class="transBtn">→</button>
+                <button type="button" class="transBtn reverseBtn" name="reverseBtn">←</button>
+            </div>
 
         <div>
             {% csrf_token %}
             <label for="input_text">翻訳されたテキスト</label><br>
-            <textarea class="main_textarea" id="input_text" name="translated_text" cols="50" rows="10" readonly></textarea><br><br>
+            <textarea class="main_textarea" id="translated_text" name="translated_text" cols="50" rows="10" readonly></textarea><br><br>
         </div>
         </form>
     </div>
