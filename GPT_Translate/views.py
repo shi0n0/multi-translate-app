@@ -2,7 +2,7 @@ from django.shortcuts import render
 import openai
 import os
 
-openai.api_key = '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'
+openai.api_key = 'API_KEY'
 
 def translate_jp_to_en(input_text):
     response = openai.Completion.create(
@@ -30,6 +30,12 @@ def translation_view(request):
     translated_text = ""
     if request.method == 'POST':
         input_text = request.POST['input_text']
-        if input_text:
+        if "transBtn" in request.POST:
+            print("翻訳ボタンが押された")
             translated_text = translate_jp_to_en(input_text)
+        
+        if "reverseBtn" in request.POST:
+            print("リバースボタンが押された")
+            translated_text = translate_en_to_jp(input_text)
+
     return render(request, 'translation.html', {'input_text': input_text, 'translated_text': translated_text})
