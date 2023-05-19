@@ -125,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/Users/shiono/Desktop/個人制作/multi-translate-app/GPT_Translate/'
+STATIC_ROOT = '/multi-translate-app/GPT_Translate/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
