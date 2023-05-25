@@ -1,9 +1,14 @@
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
 html,body{
     margin: 0;
     padding: 0;
+    font-family: "Noto Sans JP";
 }
+
 header{
+    background-color: #f7fafc;
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
 }
 
@@ -19,6 +24,7 @@ header{
 .main_textarea{
     padding: 1rem 1rem;
     font-size: 1.2rem;
+    font-weight: 300;
 }
 
 .transBtn_wrap{
@@ -45,6 +51,10 @@ header{
     transform: translateX(0.5rem);
     box-shadow: -0.5rem 0px 0px rgb(0, 208, 255);
 }
+
+.subWrapper{
+    padding: 1rem;
+}
 </style>
 
 <!DOCTYPE html>
@@ -56,7 +66,7 @@ header{
 <body>
 
     <header>
-        <h1 style="text-align: center;">翻訳フォーム</h1>
+        <h1 style="text-align: center; font-weight: 400;";>AI翻訳フォーム</h1>
     </header>
 <div>
     <div>
@@ -64,7 +74,7 @@ header{
             <div>
             {% csrf_token %}
             <label for="input_text">翻訳するテキスト</label><br>
-            <textarea class="main_textarea" id="input_text" name="input_text" cols="50" rows="10"></textarea><br><br>
+            <textarea class="main_textarea" id="input_text" name="input_text" cols="55" rows="15" placeholder="ここに翻訳するテキストを入力してください"></textarea><br><br>
             </div>
 
             <div class="transBtn_wrap">
@@ -75,24 +85,24 @@ header{
         <div>
             {% csrf_token %}
             <label for="input_text">翻訳されたテキスト</label><br>
-            <textarea class="main_textarea" id="translated_text" name="translated_text" cols="50" rows="10" readonly></textarea><br><br>
+            <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="15" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea><br><br>
         </div>
         </form>
     </div>
 </div>
 
-<div>
-    <h2>【使用方法】</h2>
-    <h3>1. 左のテキストエリアに翻訳した文章を入力します
+<div class="subWrapper">
+    <h3>【使用方法】</h3>
+    <p>1. 左のテキストエリアに翻訳した文章を入力します
         2. 真ん中にある実行ボタンを押します 
         3. 翻訳結果が表示されます
     <br>
-    </h3>
-    <h2>【仕様説明】</h2>
-    <h3>この翻訳にはGPTAPIを使用しています。モデルは"text-davinci-003"。<br>
+    </p>
+    <h3>【仕様説明】</h3>
+    <p>この翻訳にはGPTAPIを使用しています。モデルは"text-davinci-003"。<br>
         GPTを使用した自然言語処理翻訳のため精度が比較的高く、適切な翻訳が生成されます。<br>
         とはいえ、あくまでAIという未だ不安定な技術のため、場合によっては不適切な翻訳が生成されることをあらかじめご了承ください。
-    </h3>
+    </p>
     <h3></h3>
 </div>
     {% if translated_text %}
