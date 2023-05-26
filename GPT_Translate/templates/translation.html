@@ -1,5 +1,5 @@
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
 
 html,body{
     margin: 0;
@@ -45,6 +45,7 @@ button{
     padding: 1rem 1rem;
     font-size: 1.2rem;
     font-weight: 300;
+    margin: 1rem 0 0 0;
 }
 
 .transBtn_wrap{
@@ -76,7 +77,19 @@ button{
     padding: 0 1rem;
 }
 
-
+.copyButton{
+    background-color: white;
+    box-shadow: 0 0 1px 1px gray;
+    border-radius: 5%;
+}
+.copyButton:hover{
+    background-color: whitesmoke
+}
+.copyButton:active{
+    -webkit-transform: translate(0,1px);
+	-moz-transform: translate(0,1px);
+	transform: translate(0,1px);
+}
 </style>
 {% load static %}
 <!DOCTYPE html>
@@ -84,9 +97,6 @@ button{
 <head>
     <meta charset="UTF-8">
     <title>自然言語翻訳</title>
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -110,7 +120,7 @@ button{
         <div>
             {% csrf_token %}
             <label for="input_text">翻訳されたテキスト</label>
-            <button class="copyButton" onclick="copyToClipboard(event)"><i class="fa-solid fa-2x fa-copy"></i></button>
+            <button class="copyButton" onclick="copyToClipboard(event)">コピー</button>
             <br>
             <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="15" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
             <br><br>
