@@ -1,163 +1,173 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
-
-html,body{
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans JP";
-}
-body{
-    background-color: #f7f7f7;
-}
-
-header{
-    background-color: #ffff;
-    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
-    width: 100%;
-}
-
-textarea{
-    width: 100%;
-    height: 100%;
-    border: none;
-    box-shadow:0px 0px 2px 1px rgba(179, 191, 196, 0.568);
-    border-radius: 1%;
-}
-
-button{
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        outline: none;
+    
+    html,body{
+        margin: 0;
         padding: 0;
-        appearance: none;
-}
-
-    .transForm{
-    margin-left: 3rem;
-    margin-right: 3rem;
-    display: flex;
-    justify-content: center;
-    justify-content: space-between;
-}
-
-.main_textarea{
-    padding: 1rem 1rem;
-    font-size: 1.2rem;
-    font-weight: 300;
-}
-
-.transBtn_wrap{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.transBtn{
-    display: flex;
-    width: 5rem;
-    height: 5rem;
-    align-items: center;
-    border: solid rgb(0, 208, 255);
-    border-radius: 40%;
-    padding: 2rem;
-    background-color: rgb(0, 208, 255);
-    box-shadow: 0.5rem 0px 0px rgba(0, 0, 0, 0.29), -0.5rem 0px 0px rgb(0, 208, 255);
-    margin: 1rem;
-
-}
-.transBtn:active{
-    -webkit-transform: translateX(0.5rem);
-    transform: translateX(0.5rem);
-    box-shadow: -0.5rem 0px 0px rgb(0, 208, 255);
-}
-
-.subWrapper{
-    padding: 0 1rem;
-}
-
-
-</style>
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>自然言語翻訳</title>
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
-</head>
-<body>
-
-    <header>
-        <h1 style="text-align: center; font-weight: 400;";>AI翻訳フォーム</h1>
-    </header>
-<div>
+        font-family: "Noto Sans JP";
+    }
+    body{
+        background-color: #f7f7f7;
+    }
+    
+    header{
+        background-color: #ffff;
+        box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
+        width: 100%;
+    }
+    
+    textarea{
+        width: 100%;
+        height: 100%;
+        border: none;
+        box-shadow:0px 0px 2px 1px rgba(179, 191, 196, 0.568);
+        border-radius: 1%;
+    }
+    
+    button{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            padding: 0;
+            appearance: none;
+    }
+    
+        .transForm{
+        margin-left: 3rem;
+        margin-right: 3rem;
+        display: flex;
+        justify-content: center;
+        justify-content: space-between;
+    }
+    
+    .main_textarea{
+        padding: 1rem 1rem;
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin: 1rem 0 0 0;
+    }
+    
+    .transBtn_wrap{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .transBtn{
+        display: flex;
+        width: 5rem;
+        height: 5rem;
+        align-items: center;
+        border: solid rgb(0, 208, 255);
+        border-radius: 40%;
+        padding: 2rem;
+        background-color: rgb(0, 208, 255);
+        box-shadow: 0.5rem 0px 0px rgba(0, 0, 0, 0.29), -0.5rem 0px 0px rgb(0, 208, 255);
+        margin: 1rem;
+    
+    }
+    .transBtn:active{
+        -webkit-transform: translateX(0.5rem);
+        transform: translateX(0.5rem);
+        box-shadow: -0.5rem 0px 0px rgb(0, 208, 255);
+    }
+    
+    .subWrapper{
+        padding: 0 1rem;
+    }
+    
+    .copyButton{
+        background-color: white;
+        box-shadow: 0 0 1px 1px gray;
+        border-radius: 5%;
+    }
+    .copyButton:hover{
+        background-color: whitesmoke
+    }
+    .copyButton:active{
+        -webkit-transform: translate(0,1px);
+        -moz-transform: translate(0,1px);
+        transform: translate(0,1px);
+    }
+    </style>
+    {% load static %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>自然言語翻訳</title>
+    </head>
+    <body>
+    
+        <header>
+            <h1 style="text-align: center; font-weight: 400;";>AI翻訳フォーム</h1>
+        </header>
     <div>
-        <form method="post" action="{% url 'translation' %}" class="transForm">
-            <div>
-            {% csrf_token %}
-            <label for="input_text">翻訳するテキスト</label><br>
-            <textarea class="main_textarea" id="input_text" name="input_text" cols="55" rows="15" placeholder="ここに翻訳するテキストを入力してください"></textarea><br><br>
-            </div>
-
-            <div class="transBtn_wrap">
-                <button type="submit" class="transBtn" name="transBtn">→</button>
-                <button type="submit" class="transBtn reverseBtn" name="reverseBtn">←</button>
-            </div>
-
         <div>
-            {% csrf_token %}
-            <label for="input_text">翻訳されたテキスト</label>
-            <button class="copyButton" onclick="copyToClipboard(event)"><i class="fa-solid fa-2x fa-copy"></i></button>
-            <br>
-            <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="15" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
-            <br><br>
+            <form method="post" action="{% url 'translation' %}" class="transForm">
+                <div>
+                {% csrf_token %}
+                <label for="input_text">翻訳するテキスト</label><br>
+                <textarea class="main_textarea" id="input_text" name="input_text" cols="55" rows="15" placeholder="ここに翻訳するテキストを入力してください"></textarea><br><br>
+                </div>
+    
+                <div class="transBtn_wrap">
+                    <button type="submit" class="transBtn" name="transBtn">→</button>
+                    <button type="submit" class="transBtn reverseBtn" name="reverseBtn">←</button>
+                </div>
+    
+            <div>
+                {% csrf_token %}
+                <label for="input_text">翻訳されたテキスト</label>
+                <button class="copyButton" onclick="copyToClipboard(event)">コピー</button>
+                <br>
+                <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="15" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
+                <br><br>
+            </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
-
-<div class="subWrapper">
-    <h3>【使用方法】</h3>
-    <p>1. 左のテキストエリアに翻訳した文章を入力します
-        2. 真ん中にある実行ボタンを押します 
-        3. 翻訳結果が表示されます
-    <br>
-    </p>
-    <h3>【仕様説明】</h3>
-    <p>この翻訳にはGPTAPIを使用しています。モデルは"text-davinci-003"。<br>
-        GPTを使用した自然言語処理翻訳のため精度が比較的高く、適切な翻訳が生成されます。<br>
-        とはいえ、あくまでAIという未だ不安定な技術のため、場合によっては不適切な翻訳が生成されることをあらかじめご了承ください。
-    </p>
-    <h3></h3>
-</div>
-    {% if translated_text %}
-    <script>
-        var textarea = document.getElementsByName("translated_text")[0];
-        textarea.value = "{{ translated_text }}";
-
-        var textarea = document.getElementsByName("input_text")[0];
-        textarea.value = "{{ input_text }}"
-
-        function copyToClipboard(event) {
-        event.preventDefault();
-        var textarea = document.getElementById("translated_text");
-        var text = textarea.value;
-        
-        navigator.clipboard.writeText(text).then(function() {
-            // Optional: Change the button text to indicate successful copying
-            var copyButton = document.getElementById("copyButton");
-            alert("Copied!")
-        }).catch(function(err) {
-            console.error('Failed to copy text: ', err);
-        });
-}
-
-
-
-    </script>
-    {% endif %}
-</body>
-</html>
+    
+    <div class="subWrapper">
+        <h3>【使用方法】</h3>
+        <p>1. 左のテキストエリアに翻訳した文章を入力します
+            2. 真ん中にある実行ボタンを押します 
+            3. 翻訳結果が表示されます
+        <br>
+        </p>
+        <h3>【仕様説明】</h3>
+        <p>この翻訳にはGPTAPIを使用しています。モデルは"text-davinci-003"。<br>
+            GPTを使用した自然言語処理翻訳のため精度が比較的高く、適切な翻訳が生成されます。<br>
+            とはいえ、あくまでAIという未だ不安定な技術のため、場合によっては不適切な翻訳が生成されることをあらかじめご了承ください。
+        </p>
+        <h3></h3>
+    </div>
+        {% if translated_text %}
+        <script>
+            var textarea = document.getElementsByName("translated_text")[0];
+            textarea.value = "{{ translated_text }}";
+    
+            var textarea = document.getElementsByName("input_text")[0];
+            textarea.value = "{{ input_text }}"
+    
+            function copyToClipboard(event) {
+            event.preventDefault();
+            var textarea = document.getElementById("translated_text");
+            var text = textarea.value;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                // Optional: Change the button text to indicate successful copying
+                var copyButton = document.getElementById("copyButton");
+                alert("Copied!")
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+            });
+    }
+    
+    
+    
+        </script>
+        {% endif %}
+    </body>
+    </html>
