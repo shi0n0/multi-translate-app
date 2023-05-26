@@ -6,12 +6,32 @@ html,body{
     padding: 0;
     font-family: "Noto Sans JP";
 }
-
-header{
-    background-color: #f7fafc;
-    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
+body{
+    background-color: #f7f7f7;
 }
 
+header{
+    background-color: #ffff;
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
+    width: 100%;
+}
+
+textarea{
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-shadow:0px 0px 2px 1px rgba(179, 191, 196, 0.568);
+    border-radius: 1%;
+}
+
+button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+}
 
     .transForm{
     margin-left: 3rem;
@@ -53,15 +73,20 @@ header{
 }
 
 .subWrapper{
-    padding: 1rem;
+    padding: 0 1rem;
 }
-</style>
 
+
+</style>
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>自然言語翻訳</title>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -84,8 +109,11 @@ header{
 
         <div>
             {% csrf_token %}
-            <label for="input_text">翻訳されたテキスト</label><br>
-            <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="15" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea><br><br>
+            <label for="input_text">翻訳されたテキスト</label>
+            <button class="copyButton" onclick="copyToClipboard(event)"><i class="fa-solid fa-2x fa-copy"></i></button>
+            <br>
+            <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="15" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
+            <br><br>
         </div>
         </form>
     </div>
@@ -112,6 +140,23 @@ header{
 
         var textarea = document.getElementsByName("input_text")[0];
         textarea.value = "{{ input_text }}"
+
+        function copyToClipboard(event) {
+        event.preventDefault();
+        var textarea = document.getElementById("translated_text");
+        var text = textarea.value;
+        
+        navigator.clipboard.writeText(text).then(function() {
+            // Optional: Change the button text to indicate successful copying
+            var copyButton = document.getElementById("copyButton");
+            alert("Copied!")
+        }).catch(function(err) {
+            console.error('Failed to copy text: ', err);
+        });
+}
+
+
+
     </script>
     {% endif %}
 </body>
