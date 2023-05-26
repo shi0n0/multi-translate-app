@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.conf import settings
 import openai
 import os
 
-openai.api_key = settings.API_KEY
+openai.api_key = os.environ.get('API_KEY')
 
 def translate_jp_to_en(input_text):
     response = openai.Completion.create(
