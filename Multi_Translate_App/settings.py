@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'GPT_Translate'
+    'GPT_Translate',
+    'fontawesomefree'
 ]
 
 MIDDLEWARE = [
