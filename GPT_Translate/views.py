@@ -7,7 +7,7 @@ openai.api_key = os.environ.get('API_KEY')
 def translate_jp_to_en(input_text):
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=(f"You are a professional translator. Translate the following sentences into English in a natural way:\n{input_text}\n\n"
+        prompt=(f"あなたはプロの翻訳家です。自然な文章で以下の文章を英語に翻訳してください。:\n{input_text}\n\n"
                 "Translation:"),
         temperature=0.7,
         max_tokens=60,
