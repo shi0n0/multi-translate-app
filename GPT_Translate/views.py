@@ -39,3 +39,7 @@ def translation_view(request):
             translated_text = translate_en_to_jp(input_text)
 
     return render(request, 'translation.html', {'input_text': input_text, 'translated_text': translated_text})
+
+
+def proofreading_view(request):
+    return render(request, 'proofreading.html')
