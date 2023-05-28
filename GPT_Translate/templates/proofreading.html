@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+文章校正フォーム
+{% endblock %}
+{% block content %}
+<form method="post" action="{% url 'translation' %}" class="transForm">
+    <div>
+    {% csrf_token %}
+    <label for="input_text">校正する文章</label><br>
+    <textarea class="main_textarea" id="input_text" name="input_text" cols="55" rows="13" placeholder="ここに校正する文章を入力してください"></textarea><br><br>
+    </div>
+
+    <div class="transBtn_wrap">
+        <button type="submit" class="transBtn" name="transBtn">→</button>
+    </div>
+
+<div>
+    {% csrf_token %}
+    <label for="input_text">校正された文章</label>
+    <button class="copyButton" onclick="copyToClipboard(event)">コピー</button>
+    <br>
+    <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="13" placeholder="ここに校正後の文章が表示されます。&#10;違う校正文章にしたい場合は再度「→」ボタンを押してください" readonly></textarea>
+    <br><br>
+</div>
+</form>
+{% endblock %}
