@@ -15,6 +15,17 @@
         box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
         width: 100%;
     }
+    header h1,h2{
+        margin: 0.1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        font-weight: 400;
+    }
+    header div{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
     
     textarea{
         width: 100%;
@@ -106,6 +117,10 @@
                 {% block title %}
                 {% endblock %}
             </h1>
+            <div>
+                <a href="/"><h2>翻訳</h2></a>
+                <a href="proofreading"><h2>文章校正</h2></a>
+            </div>
         </header>
     <main>
         {% block content %}
