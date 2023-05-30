@@ -1,108 +1,8 @@
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
-    
-    html,body{
-        margin: 0;
-        padding: 0;
-        font-family: "Noto Sans JP";
-    }
-    body{
-        background-color: #f7f7f7;
-    }
-    
-    header{
-        background-color: #ffff;
-        box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
-        width: 100%;
-    }
-    
-    textarea{
-        width: 100%;
-        height: 100%;
-        border: none;
-        box-shadow:0px 0px 2px 1px rgba(179, 191, 196, 0.568);
-        border-radius: 1%;
-    }
-    
-    button{
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            padding: 0;
-            appearance: none;
-    }
-    
-        .transForm{
-        margin-left: 3rem;
-        margin-right: 3rem;
-        display: flex;
-        justify-content: center;
-        justify-content: space-between;
-    }
-    
-    .main_textarea{
-        padding: 1rem 1rem;
-        font-size: 1.2rem;
-        font-weight: 300;
-        margin: 1rem 0 0 0;
-    }
-    
-    .transBtn_wrap{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .transBtn{
-        display: flex;
-        width: 5rem;
-        height: 5rem;
-        align-items: center;
-        border: solid rgb(0, 208, 255);
-        border-radius: 40%;
-        padding: 2rem;
-        background-color: rgb(0, 208, 255);
-        box-shadow: 0.5rem 0px 0px rgba(0, 0, 0, 0.29), -0.5rem 0px 0px rgb(0, 208, 255);
-        margin: 1rem;
-    
-    }
-    .transBtn:active{
-        -webkit-transform: translateX(0.5rem);
-        transform: translateX(0.5rem);
-        box-shadow: -0.5rem 0px 0px rgb(0, 208, 255);
-    }
-    
-    .subWrapper{
-        padding: 0 1rem;
-    }
-    
-    .copyButton{
-        background-color: white;
-        box-shadow: 0 0 1px 1px gray;
-        border-radius: 5%;
-    }
-    .copyButton:hover{
-        background-color: whitesmoke
-    }
-    .copyButton:active{
-        -webkit-transform: translate(0,1px);
-        -moz-transform: translate(0,1px);
-        transform: translate(0,1px);
-    }
-    </style>
-    {% load static %}
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>自然言語翻訳</title>
-    </head>
-    <body>
-    
-        <header>
-            <h1 style="text-align: center; font-weight: 400;";>AI翻訳フォーム</h1>
-        </header>
+{% extends "base.html" %}
+{% block title %}
+AI翻訳フォーム
+{% endblock %}
+{% block content%}
     <div>
         <div>
             <form method="post" action="{% url 'translation' %}" class="transForm">
@@ -128,7 +28,8 @@
             </form>
         </div>
     </div>
-    
+{% endblock %}
+{% block subcontent %}
     <div class="subWrapper">
         <br>
         <h3>【使用方法】</h3>
@@ -170,5 +71,4 @@
     
         </script>
         {% endif %}
-    </body>
-    </html>
+{% endblock %}
