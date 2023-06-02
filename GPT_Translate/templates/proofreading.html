@@ -6,7 +6,7 @@
 文章校正フォーム
 {% endblock %}
 {% block content %}
-<form method="post" action="{% url 'translation' %}" class="transForm">
+<form method="post" action="{% url 'proofreading' %}" class="transForm">
     <div>
     {% csrf_token %}
     <label for="input_text">校正する文章</label><br>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="transBtn_wrap">
-        <button type="submit" class="transBtn" name="transBtn">→</button>
+        <button type="submit" class="transBtn" name="proofreadingBtn">→</button>
     </div>
 
 <div>
@@ -22,7 +22,7 @@
     <label for="input_text">校正された文章</label>
     <button class="copyButton" onclick="copyToClipboard(event)">コピー</button>
     <br>
-    <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="13" placeholder="ここに校正後の文章が表示されます。&#10;違う校正文章にしたい場合は再度「→」ボタンを押してください" readonly></textarea>
+    <textarea class="main_textarea" id="proofreading_text" name="proofreading_text" cols="55" rows="13" placeholder="ここに校正後の文章が表示されます。&#10;違う校正文章にしたい場合は再度「→」ボタンを押してください" readonly></textarea>
     <br><br>
 </div>
 </form>
@@ -41,4 +41,29 @@
     とはいえ、あくまでAIという未だ不安定な技術のため、場合によっては不適切な文章が生成される可能性があることをあらかじめご了承ください。
 </p>
 <h3></h3>
+<div>
+    {% if proofreading_text %}
+    <script>
+        var textarea = document.getElementsByName("proofreading_text")[0];
+        textarea.value = "{{ proofreading_text }}";
+
+        var textarea = document.getElementsByName("input_text")[0];
+        textarea.value = "{{ input_text }}";
+
+        function copyToClipboard(event) {
+        event.preventDefault();
+        var textarea = document.getElementById("proofreading_text");
+        var text = textarea.value;
+        
+        navigator.clipboard.writeText(text).then(function() {
+            // Optional: Change the button text to indicate successful copying
+            var copyButton = document.getElementById("copyButton");
+            alert("Copied!")
+        }).catch(function(err) {
+            console.error('Failed to copy text: ', err);
+        });
+}
+    </script>
+    {% endif %}
+</div>
 {% endblock %}
