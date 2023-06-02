@@ -1,54 +1,45 @@
 {% extends "base.html" %}
-{% block tab-title %}
-AI翻訳
-{% endblock %}
 {% block title %}
 AI翻訳フォーム
 {% endblock %}
 {% block content%}
+<form method="post" action="{% url 'translation' %}" class="transForm">
     <div>
-        <div>
-            <form method="post" action="{% url 'translation' %}" class="transForm">
-                <div>
-                {% csrf_token %}
-                <label for="input_text">翻訳するテキスト</label><br>
-                <textarea class="main_textarea" id="input_text" name="input_text" cols="55" rows="13" placeholder="ここに翻訳するテキストを入力してください"></textarea><br><br>
-                </div>
-    
-                <div class="transBtn_wrap">
-                    <button type="submit" class="transBtn" name="transBtn">→</button>
-                    <button type="submit" class="transBtn reverseBtn" name="reverseBtn">←</button>
-                </div>
-    
-            <div>
-                {% csrf_token %}
-                <label for="input_text">翻訳されたテキスト</label>
-                <button class="copyButton" onclick="copyToClipboard(event)">コピー</button>
-                <br>
-                <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="13" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
-                <br><br>
-            </div>
-            </form>
-        </div>
+    {% csrf_token %}
+    <label for="input_text">翻訳するテキスト</label><br>
+    <textarea class="main_textarea" id="input_text" name="input_text" cols="55" rows="13" placeholder="ここに翻訳するテキストを入力してください"></textarea><br><br>
     </div>
+    
+    <div class="transBtn_wrap">
+        <button type="submit" class="transBtn" name="transBtn">→</button>
+        <button type="submit" class="transBtn reverseBtn" name="reverseBtn">←</button>
+    </div>
+    
+<div>
+    {% csrf_token %}
+    <label for="input_text">翻訳されたテキスト</label>
+    <button class="copyButton" onclick="copyToClipboard(event)">コピー</button>
+    <br>
+    <textarea class="main_textarea" id="translated_text" name="translated_text" cols="55" rows="13" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
+    <br><br>
+</div>
+</form>
 {% endblock %}
-    <div class="subWrapper">
 {% block subcontent %}
-        <br>
-        <h3>【使用方法】</h3>
-        <p>1. 左のテキストエリアに翻訳したい文章を入力します
-            2. 真ん中にある実行ボタンを押します 
-            3. 翻訳結果が表示されます
-        <br>
-        </p>
-        <h3>【仕様説明】</h3>
-        <p>この翻訳にはGPTAPIを使用しています。モデルは"text-davinci-003"。<br>
-            GPTを使用した自然言語処理翻訳のため精度が比較的高く、適切な翻訳が生成されます。<br>
-            とはいえ、あくまでAIという未だ不安定な技術のため、場合によっては不適切な翻訳が生成される可能性があることをあらかじめご了承ください。
-        </p>
-        <h3></h3>
-{% endblock %}
-    </div>
+<br>
+<h3>【使用方法】</h3>
+<p>1. 左のテキストエリアに翻訳した文章を入力します
+    2. 真ん中にある実行ボタンを押します 
+    3. 翻訳結果が表示されます
+<br>
+</p>
+<h3>【仕様説明】</h3>
+<p>この翻訳にはGPTAPIを使用しています。モデルは"text-davinci-003"。<br>
+    GPTを使用した自然言語処理翻訳のため精度が比較的高く、適切な翻訳が生成されます。<br>
+    とはいえ、あくまでAIという未だ不安定な技術のため、場合によっては不適切な翻訳が生成されることをあらかじめご了承ください。
+</p>
+
+    <div>
         {% if translated_text %}
         <script>
             var textarea = document.getElementsByName("translated_text")[0];
@@ -75,3 +66,5 @@ AI翻訳フォーム
     
         </script>
         {% endif %}
+    </div>
+{% endblock %}
