@@ -24,6 +24,14 @@ def translate_en_to_jp(input_text):
     )
     return response.choices[0].text.strip()
 
+def proofreading_to_text(input_text):
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=(f"以下の文章を適切な形にしてください:\n{input_text}\n\n"),
+        temperature=0.7,
+        max_tokens=120,
+    )
+    return response.choices[0].text.strip()
 
 def translation_view(request):
     input_text = ""
@@ -40,6 +48,15 @@ def translation_view(request):
 
     return render(request, 'translation.html', {'input_text': input_text, 'translated_text': translated_text})
 
-
 def proofreading_view(request):
-    return render(request, 'proofreading.html')
+    input_text = ""
+    proofreading_text = ""
+    if request.method == 'POST':
+        input_text = request.POST['input_text']
+        if "proofreadingBtn" in request.POST:
+            print("文章校正開始")
+            proofreading_text = proofreading_to_text(input_text)
+
+    return render(request, 'proofreading.html', {'input_text': input_text, 'proofreading_text': proofreading_text})
+
+
