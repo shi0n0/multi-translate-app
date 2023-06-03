@@ -6,26 +6,30 @@ AI翻訳
 AI Translation
 {% endblock %}
 {% block content%}
-<form method="post" action="{% url 'translation' %}" class="content-center justify-center text-black m-5 sm:flex">
-    <div>
+<form method="post" action="{% url 'translation' %}" class="flex flex-col content-center justify-center text-black p-5 md:w-full md:flex-row">
+
+    <div class="md:w-full">
     {% csrf_token %}
     <label for="input_text" class="text-white">翻訳するテキスト</label><br>
-    <textarea class="rounded-lg p-3" id="input_text" name="input_text" cols="55" rows="13" placeholder="ここに翻訳するテキストを入力してください"></textarea><br><br>
+    <textarea class="rounded-lg w-full h-50 p-3" id="input_text" name="input_text" rows="10" placeholder="ここに翻訳するテキストを入力してください"></textarea><br><br>
     </div>
     
+
     <div class="text-white flex flex-col justify-center m-1">
         <button type="submit" class="w-8 text-3xl" name="transBtn">→</button>
         <button type="submit" class="w-8 text-3xl" name="reverseBtn">←</button>
     </div>
     
-    <div>
+
+    <div class="md:w-full">
         {% csrf_token %}
         <label for="input_text" class="text-white">翻訳されたテキスト</label>
         <button class="text-white" onclick="copyToClipboard(event)">コピー</button>
         <br>
-        <textarea class="rounded-lg p-3" id="translated_text" name="translated_text" cols="55" rows="13" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
+        <textarea class="rounded-lg w-full h-50 p-3" id="translated_text" name="translated_text" rows="10" placeholder="ここに翻訳後のテキストが表示されます。&#10;このテキストを日本語に再翻訳したい場合は←ボタンを押してください" readonly></textarea>
         <br><br>
     </div>
+      
 </form>
 {% endblock %}
 {% block subcontent %}
