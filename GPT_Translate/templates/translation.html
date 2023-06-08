@@ -2,9 +2,6 @@
 {% block tab-title %}
 AI翻訳
 {% endblock %}
-{% block title %}
-AI Translation
-{% endblock %}
 {% block content%}
 <form method="post" action="{% url 'translation' %}" class="flex flex-col content-center justify-center text-black p-5 md:w-full md:flex-row">
 
@@ -68,9 +65,6 @@ AI Translation
                 console.error('Failed to copy text: ', err);
             });
     }
-    
-    
-    
         </script>
         {% endif %}
     </div>
