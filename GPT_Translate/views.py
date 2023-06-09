@@ -33,6 +33,9 @@ def proofreading_to_text(input_text):
     )
     return response.choices[0].text.strip()
 
+def top_view(request):
+    return render(request,"top.html")
+
 def translation_view(request):
     input_text = ""
     translated_text = ""
