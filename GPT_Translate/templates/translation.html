@@ -3,7 +3,7 @@
 AI翻訳
 {% endblock %}
 {% block content%}
-<form method="post" action="{% url 'translation' %}" class="flex flex-col content-center justify-center text-black p-5 md:w-full md:flex-row">
+<form method="post" action="{% url 'translation' %}" class="flex flex-col content-center justify-center text-black p-10 md:w-full md:flex-row">
 
     <div class="md:w-full">
     {% csrf_token %}
