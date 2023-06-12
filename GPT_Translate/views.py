@@ -36,6 +36,9 @@ def proofreading_to_text(input_text):
 def top_view(request):
     return render(request,"top.html")
 
+def talk_view(request):
+    return render(request,"talk.html")
+
 def translation_view(request):
     input_text = ""
     translated_text = ""
