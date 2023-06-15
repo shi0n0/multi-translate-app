@@ -10,10 +10,10 @@
   </head>
   <body class="bg-indigo-600 text-base text-white font-sans">
     <header class="text-center p-8">
-      <div class="flex items-center" style="justify-content: space-between">
+      <div class="flex items-center justify-between">
         <div>
           <a href="/">
-            <p class="justify-left text-3xl font-mono">
+            <p class="text-3xl font-mono">
               AI Tools
             </p>
           </a>
@@ -21,12 +21,12 @@
         <div class="flex font-sans">
           <a class="m-2 hover:animate-bounce" href="translation"><h2>翻訳</h2></a>
           <a class="m-2 hover:animate-bounce" href="proofreading"><h2>校正</h2></a>
-          <a class="m-2 hover:animate-bounce" href="talk">会話</a>
+          <a class="m-2 hover:animate-bounce" href="talk"><h2>会話</h2></a>
         </div>
       </div>
     </header>
-    <main>{% block content %} {% endblock %}</main>
+    <main class="p-5">{% block content %} {% endblock %}</main>
 
-    <div class="pr-5 pl-5">{% block subcontent %} {% endblock %}</div>
+    <div class="px-5">{% block subcontent %} {% endblock %}</div>
   </body>
 </html>
