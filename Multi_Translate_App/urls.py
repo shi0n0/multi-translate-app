@@ -22,5 +22,5 @@ urlpatterns = [
     path('',views.top_view, name='top'),
     path('translation', views.translation_view, name='translation'),
     path('proofreading', views.proofreading_view, name="proofreading"),
-    path('talk', views.talk_view, name="talk")
+    path('story', views.story_view, name="story")
 ]
