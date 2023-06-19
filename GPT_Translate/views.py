@@ -27,17 +27,34 @@ def translate_en_to_jp(input_text):
 def proofreading_to_text(input_text):
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=(f"以下の文章を適切な形にしてください:\n{input_text}\n\n"),
+        prompt=(f"以下の文章を適切な形に校正してください:\n{input_text}\n\n"),
         temperature=0.7,
         max_tokens=120,
     )
     return response.choices[0].text.strip()
 
+def story_generate_AI(world, character_1, character_2):
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=(f"以下のプロンプトを元に、ストーリーを作成してください:\n世界観{world}\n人物1{character_1}\n人物2{character_2}\n\n"),
+        temperature=0.7,
+        max_tokens=300,
+    )
+
 def top_view(request):
     return render(request,"top.html")
 
-def talk_view(request):
-    return render(request,"talk.html")
+def story_view(request):
+    world = ""
+    character_1 = ""
+    character_2 = ""
+    if request.method == 'POST':
+        world = request.POST['world']
+        if "GenBtn" in request.POST:
+            print("生成ボタンが押された")
+            story_generate_AI = story_generate_AI(world,character_1,character_2)
+
+    return render(request, 'story.html', {'world': world, 'character_1': character_1, 'character_2': character_2})
 
 def translation_view(request):
     input_text = ""
