@@ -4,60 +4,48 @@
 {% endblock %}
 {% block content %}
 <form method="post" action="{% url 'proofreading' %}" class="flex flex-col content-center justify-center text-black md:flex-row">
-
     <div class="md:w-full">
         {% csrf_token %}
         <label for="input_text" class="text-white">校正する文章</label><br>
         <textarea class="rounded-lg w-full h-50 p-3" id="input_text" name="input_text" rows="10" placeholder="ここに校正する文章を入力してください"></textarea>
     </div>
-
     <div class="text-white flex flex-col justify-center m-1 items-center">
         <button type="submit" class="w-8 h-8 md:w-12 md:h-12 text-3xl md:text-4xl rounded-full bg-blue-500 hover:bg-blue-600 text-white" name="proofreadingBtn">
             <span class="md:hidden">↓</span>
             <span class="hidden md:inline">→</span>
         </button>
     </div>
-
-<div class="md:w-full">
-    {% csrf_token %}
-    <label for="input_text" class="text-white">校正された文章</label>
-    <button class="text-white text-sm bg-blue-500 hover:bg-blue-600 px-2 py-0.5 rounded-md" onclick="copyToClipboard(event)">コピー</button>
-    <br>
-    <textarea class="rounded-lg w-full h-50 p-3" id="proofreading_text" name="proofreading_text" rows="10" placeholder="ここに校正後の文章が表示されます。" readonly></textarea>
-    <br><br>
-</div>
-
+    <div class="md:w-full">
+        {% csrf_token %}
+        <label for="input_text" class="text-white">校正された文章</label>
+        <button class="text-white text-sm bg-blue-500 hover:bg-blue-600 px-2 py-0.5 rounded-md" onclick="copyToClipboard(event)">コピー</button>
+        <textarea class="rounded-lg w-full h-50 p-3" id="proofreading_text" name="proofreading_text" rows="10" placeholder="ここに校正後の文章が表示されます。" readonly></textarea>
+    </div>
 </form>
 {% endblock %}
 {% block subcontent %}
-<br>
 <p class="text-2xl">【使用方法】</p>
 <p>1. 左のテキストエリアに校正したい文章を入力します</p>
-<p>2. 真ん中にある実行ボタンを押します </p>
+<p>2. 真ん中にある実行ボタンを押します</p>
 <p>3. 校正された文章が表示されます</p>
 <br>
-</p>
 <p class="text-2xl">【仕様説明】</p>
 <p class="text-xl text-yellow-300">※tokenの影響で長い文章だと途切れてしまうので短文程度でお願いします</p>
 <p>この文章校正にはGPTAPIを使用しています。モデルは"text-davinci-003"。<br>
     GPTを使用した自然言語処理翻訳のため精度が比較的高く、適切な文章が生成されます。<br>
     とはいえ、あくまでAIという未だ不安定な技術のため、場合によっては不適切な文章が生成される可能性があることをあらかじめご了承ください。
 </p>
-
 <div>
     {% if proofreading_text %}
     <script>
         var textarea = document.getElementsByName("proofreading_text")[0];
         textarea.value = "{{ proofreading_text }}";
-
         var textarea = document.getElementsByName("input_text")[0];
         textarea.value = "{{ input_text }}";
-
         function copyToClipboard(event) {
         event.preventDefault();
         var textarea = document.getElementById("proofreading_text");
         var text = textarea.value;
-        
         navigator.clipboard.writeText(text).then(function() {
             // Optional: Change the button text to indicate successful copying
             var copyButton = document.getElementById("copyButton");
@@ -65,7 +53,7 @@
         }).catch(function(err) {
             console.error('Failed to copy text: ', err);
         });
-}
+        }
     </script>
     {% endif %}
 </div>
