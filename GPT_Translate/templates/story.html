@@ -5,26 +5,30 @@
 {% block content %}
 <div>
     <p class="text-2xl">AIにおまかせ</p>
-    <div class="flex flex-col md:flex-row">
-        <div class="w-full md:w-1/2 p-4">
-          <label for="world" class="mb-2">舞台設定</label>
-          <input id="world" type="text" placeholder="舞台設定を入力してください 例:異世界,江戸時代,宇宙,サイバーパンク etc..." class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800">
-          <label for="character_1">人物1</label>
-          <input id="character_1" type="text" placeholder="人物1を入力してください 例:キリト" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
-          <label for="character_2">人物2</label>
-          <input id="character_2" type="text" placeholder="人物2を入力してください 例:アスナ" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
-          <label for=""></label>
-        </div>
+    <form method="post" action="{% url 'story' %}">
+        {% csrf_token %}
+        <div class="flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 p-4">
+                <label for="world" class="mb-2">舞台設定</label>
+                <input id="world" name="world" type="text" placeholder="舞台設定を入力してください 例:異世界,江戸時代,宇宙,サイバーパンク etc..." class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800">
+                <label for="character_1">人物1</label>
+                <input id="character_1" name="character_1" type="text" placeholder="人物1を入力してください 例:キリト" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
+                <label for="character_2">人物2</label>
+                <input id="character_2" name="character_2" type="text" placeholder="人物2を入力してください 例:アスナ" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
+            </div>
 
-        <div class="w-full md:w-1/2 p-4 flex flex-col">
-            <label for="writing">文章で作成:</label>
-            <textarea id="writing" placeholder="現代に紛れ込んだ旧世界からのタイムリープ者。名前はタクト。ヒロインは明美。" class="w-full h-full esize-none p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 overflow-auto"></textarea>
+            <div class="w-full md:w-1/2 p-4 flex flex-col">
+                <label for="writing">文章で作成:</label>
+                <textarea id="writing" placeholder="現代に紛れ込んだ旧世界からのタイムリープ者。名前はタクト。ヒロインは明美。" class="w-full h-full resize-none p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 overflow-auto"></textarea>
+            </div>
         </div>
-    </div>
-    <button type="submit" name="GenBtn">生成開始</button>
-    <div>
-        <label for="story_generate_AI">生成された文章</label>
-        <textarea name="story_generate_AI" id="story_generate_AI" class="w-full"></textarea>
-    </div>
+        <div class="flex justify-center">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300" name="GenBtn" id="GenBtn">生成開始</button>
+        </div>
+        <div class="w-full p-4">
+            <label for="generated_story">生成された文章</label>
+            <textarea name="generated_story" id="generated_story" class="text-black w-full rounded-md p-3" rows="10" readonly>{{generated_story}}</textarea>
+        </div>
+    </form>
 </div>
 {% endblock %}
