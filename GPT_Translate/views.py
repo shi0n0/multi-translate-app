@@ -40,6 +40,7 @@ def story_generate_AI(world, character_1, character_2):
         temperature=0.7,
         max_tokens=300,
     )
+    return response.choices[0].text.strip()
 
 def top_view(request):
     return render(request,"top.html")
@@ -48,13 +49,25 @@ def story_view(request):
     world = ""
     character_1 = ""
     character_2 = ""
-    if request.method == 'POST':
-        world = request.POST['world']
-        if "GenBtn" in request.POST:
-            print("生成ボタンが押された")
-            story_generate_AI = story_generate_AI(world,character_1,character_2)
+    generated_story = ""
 
-    return render(request, 'story.html', {'world': world, 'character_1': character_1, 'character_2': character_2})
+    if request.method == 'POST':
+        world = request.POST.get('world', '')
+        character_1 = request.POST.get('character_1', '')
+        character_2 = request.POST.get('character_2', '')
+
+        if "GenBtn" in request.POST:
+            generated_story = story_generate_AI(world, character_1, character_2)
+
+    context = {
+        'world': world,
+        'character_1': character_1,
+        'character_2': character_2,
+        'generated_story': generated_story,
+    }
+
+    return render(request, 'story.html', context)
+
 
 def translation_view(request):
     input_text = ""
