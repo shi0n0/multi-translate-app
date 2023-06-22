@@ -33,10 +33,10 @@ def proofreading_to_text(input_text):
     )
     return response.choices[0].text.strip()
 
-def story_generate_AI(world, character_1, character_2):
+def story_generate_AI(world, character_1, character_2, writing):
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=(f"以下のプロンプトを元に、ストーリーを作成してください:\n世界観{world}\n人物1{character_1}\n人物2{character_2}\n\n"),
+        prompt=(f"以下のプロンプトを元に、ストーリーを作成してください。改行等は要りません。[1]を参考にし、もし[1]に記述がない場合は[2]を参照してください:\n[1]世界観:{world}\n[1]人物1:{character_1}\n[1]人物2:{character_2}\n[2]{writing}\n"),
         temperature=0.7,
         max_tokens=300,
     )
@@ -49,20 +49,23 @@ def story_view(request):
     world = ""
     character_1 = ""
     character_2 = ""
+    writing = ""
     generated_story = ""
 
     if request.method == 'POST':
         world = request.POST.get('world', '')
         character_1 = request.POST.get('character_1', '')
         character_2 = request.POST.get('character_2', '')
+        writing =  request.POST.get('writing', '')
 
         if "GenBtn" in request.POST:
-            generated_story = story_generate_AI(world, character_1, character_2)
+            generated_story = story_generate_AI(world, character_1, character_2, writing)
 
     context = {
         'world': world,
         'character_1': character_1,
         'character_2': character_2,
+        'writing': writing,
         'generated_story': generated_story,
     }
 
