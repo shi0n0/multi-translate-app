@@ -4,7 +4,6 @@
 {% endblock %}
 {% block content %}
 <div>
-    <p class="text-2xl">AIにおまかせ</p>
     <form method="post" action="{% url 'story' %}">
         {% csrf_token %}
         <div class="flex flex-col md:flex-row">
@@ -18,10 +17,21 @@
             </div>
 
             <div class="w-full md:w-1/2 p-4 flex flex-col">
-                <label for="writing">文章で作成:</label>
-                <textarea id="writing" placeholder="現代に紛れ込んだ旧世界からのタイムリープ者。名前はタクト。ヒロインは明美。" class="w-full h-full resize-none p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 overflow-auto"></textarea>
+                <label for="theme">テーマ:</label>
+                <input id="theme" name="theme" type="text" placeholder="テーマを入力してください 例:友情、恋愛、運命 etc.." class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
+                <label for="goal">目標:</label>
+                <input id="goal" name="goal" type="text" placeholder="目標を入力してください 例:魔王を倒す、大会に優勝する 等" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
+                <label for="conflict">障害や壁:</label>
+                <input id="conflict" name="conflict" type="text" placeholder="物語の障害や壁を入力してください 例:中ボスが出てくる、試合に負けかける 等" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
+
+
             </div>
         </div>
+        <div class="p-4">
+            <label for="setting">追加設定:</label>
+            <input id="setting" name="setting" type="text" placeholder="追加設定を入力してください 例:" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 ">
+        </div>
+
         <div class="flex justify-center">
             <button type="submit" class="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300" name="GenBtn" id="GenBtn">生成開始</button>
         </div>
