@@ -33,10 +33,10 @@ def proofreading_to_text(input_text):
     )
     return response.choices[0].text.strip()
 
-def story_generate_AI(world, character_1, character_2, writing):
+def story_generate_AI(world, character_1, character_2, theme, goal, setting, conflict):
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=(f"以下のプロンプトを元に、ストーリーを作成してください。改行等は要りません。[1]を参考にし、もし[1]に記述がない場合は[2]を参照してください:\n[1]世界観:{world}\n[1]人物1:{character_1}\n[1]人物2:{character_2}\n[2]{writing}\n"),
+        prompt=(f"以下のプロンプトを元に、短編ストーリーを作成してください。改行等は要りません。:\n世界観:{world}\n人物1:{character_1}\n人物2:{character_2}\nテーマ:{theme}\n目標:{goal}\n追加設定:{setting}\n障害や壁{conflict}"),
         temperature=0.7,
         max_tokens=300,
     )
@@ -49,23 +49,32 @@ def story_view(request):
     world = ""
     character_1 = ""
     character_2 = ""
-    writing = ""
+    theme = ""
+    goal = ""
+    setting = ""
+    conflict = ""
     generated_story = ""
 
     if request.method == 'POST':
         world = request.POST.get('world', '')
         character_1 = request.POST.get('character_1', '')
         character_2 = request.POST.get('character_2', '')
-        writing =  request.POST.get('writing', '')
+        theme =  request.POST.get('theme', '')
+        goal = request.POST.get('goal', '')
+        setting = request.POST.get('setting', '')
+        conflict = request.POST.get('conflict', '')
 
         if "GenBtn" in request.POST:
-            generated_story = story_generate_AI(world, character_1, character_2, writing)
+            generated_story = story_generate_AI(world, character_1, character_2, theme, goal, setting, conflict)
 
     context = {
         'world': world,
         'character_1': character_1,
         'character_2': character_2,
-        'writing': writing,
+        'writing': theme,
+        'goal': goal,
+        'setting': setting,
+        'conflict': conflict,
         'generated_story': generated_story,
     }
 
@@ -85,7 +94,7 @@ def translation_view(request):
             print("リバースボタンが押された")
             translated_text = translate_en_to_jp(input_text)
 
-    return render(request, 'translation.html', {'input_text': input_text, 'translated_text': translated_text})
+    return render(request, 'translation.html', {'input_text': input_text, 'translated_text': translated_text,})
 
 def proofreading_view(request):
     input_text = ""
