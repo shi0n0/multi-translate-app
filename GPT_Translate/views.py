@@ -36,9 +36,9 @@ def proofreading_to_text(input_text):
 def story_generate_AI(world, character_1, character_2, theme, goal, setting, conflict):
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=(f"以下のプロンプトを元に、短編ストーリーを作成してください。改行等は要りません。:\n世界観:{world}\n人物1:{character_1}\n人物2:{character_2}\nテーマ:{theme}\n目標:{goal}\n追加設定:{setting}\n障害や壁{conflict}"),
+        prompt=(f"以下のプロンプトを元に、長編ストーリーを作成してください。改行等は要りません。:\n世界観:{world}\n人物1:{character_1}\n人物2:{character_2}\nテーマ:{theme}\n目標:{goal}\n追加設定:{setting}\n障害や壁{conflict}"),
         temperature=0.7,
-        max_tokens=300,
+        max_tokens=1000,
     )
     return response.choices[0].text.strip()
 
